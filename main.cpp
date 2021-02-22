@@ -1,7 +1,9 @@
-#include <opencv2/objdetect/objdetect.hpp>
+/* #include <opencv2/objdetect/objdetect.hpp> */
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/imgproc/types_c.h>
+#include <opencv2/objdetect.hpp>
 
 #include <GL/gl.h>
 #include <GL/freeglut.h>
@@ -19,7 +21,7 @@ const float near = 1.0;
 
 /** Global variables */
 //-- capture opencv
-const cv::String face_cascade_name = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml";
+const cv::String face_cascade_name = "/usr/share/opencv4/haarcascades/haarcascade_frontalface_alt.xml";
 cv::CascadeClassifier face_cascade;
 cv::VideoCapture *capture = NULL;
 cv::Mat frame;
@@ -92,9 +94,9 @@ int main( int argc, char **argv )
         return 1;
     }
 
-    // CAMERA IMAGE DIMENSIONS
-    camWidth = (int) capture->get( CV_CAP_PROP_FRAME_WIDTH );
-    camHeight = (int) capture->get( CV_CAP_PROP_FRAME_HEIGHT );
+    // CAMERA IMAGE DIMENSION cv::S
+    camWidth = (int) capture->get( cv::CAP_PROP_FRAME_WIDTH );
+    camHeight = (int) capture->get( cv::CAP_PROP_FRAME_HEIGHT );
 
     // GLUT INIT
     glutInit( &argc, argv );
@@ -194,7 +196,7 @@ cv::Mat detectEyes(cv::Mat image)
 
     // DETECT FACE
     //-- Find bigger face (opencv documentation)
-    face_cascade.detectMultiScale( image_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE|CV_HAAR_FIND_BIGGEST_OBJECT, cv::Size(minFaceSize, minFaceSize) );
+    face_cascade.detectMultiScale( image_gray, faces, 1.1, 2, 0|  cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT , cv::Size(minFaceSize, minFaceSize) );
 
     for( size_t i = 0; i < faces.size(); i++ )
     {
