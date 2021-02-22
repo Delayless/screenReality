@@ -5,11 +5,15 @@ ScreenReality
 Creates an Augmented Reality through your computer screen, after detecting your eyes position.
 
 ### Prerequisites
-* OpenCV 2.4.10 : `sudo apt-get install libopencv-dev`
-* OpenGL & freeGLUT : `sudo apt-get install libxi-dev libxmu-dev freeglut3-dev`
+1. Ubuntu
+	* OpenCV 2.4.10 : `sudo apt-get install libopencv-dev`
+	* OpenGL & freeGLUT : `sudo apt-get install libxi-dev libxmu-dev freeglut3-dev`
+
+2. ArchLinux
+	* `sudo pacman -S opencv libxi libxmu freeglut vtk hdf5 glew`
 
 ### Build
-In a Linux Terminal: 
+In a Linux Terminal:
 ```
 git clone https://github.com/agirault/screenReality.git
 cd screenReality
